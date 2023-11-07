@@ -20,6 +20,24 @@ provider "aws" {
   region = "us-east-1"
 }
 
+### LAMBDA
+
+resource "aws_lambda_function" "check_token" {
+  function_name = "check_token"
+  handler      = "index.handler"
+  runtime      = "python3.8" 
+  role         = aws_iam_role.lambda_execution_role.arn
+  source_code_hash = null
+}
+
+resource "aws_lambda_function" "generate_token" {
+  function_name = "generate_token"
+  handler      = "index.handler"
+  runtime      = "python3.8"
+  role         = aws_iam_role.lambda_execution_role.arn
+  source_code_hash = null
+}
+
 ### GATEWAYs
 
 resource "aws_api_gateway_rest_api" "lanchonetedarua" {
